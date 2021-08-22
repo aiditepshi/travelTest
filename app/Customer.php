@@ -22,4 +22,8 @@ class Customer extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function trips()
+    {
+        return $this->belongsToMany(Trip::class,'customers_trips');
+    }
 }
