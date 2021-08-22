@@ -12,13 +12,13 @@ class Review extends Model
         'rating',
         'customer_id',
         'trip_id',
-    ]
-   public function customers()
+    ];
+   public function customer()
    {
        return $this->belongsTo(Customer::class);
    }
 
-    public function trips()
+    public function trip()
     {
         return $this->belongsTo(Trip::class);
     }
