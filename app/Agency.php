@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
-use App\Trip;
 
 class Agency extends Model
 {
@@ -28,6 +26,6 @@ class Agency extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class); 
+        return $this->hasMany(User::class);
     }
 }
