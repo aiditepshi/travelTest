@@ -15,9 +15,9 @@ class ModifyUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('role', ['customer', 'employee']);
-            $table->unsignedBigInteger('agency_id');
+            $table->unsignedBigInteger('agency_id')->nullable();
             $table->foreign('agency_id')->references('id')->on('agencies');
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
