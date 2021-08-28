@@ -31,13 +31,32 @@ button {
 }
 </style>
 
-  <div class="card-header">
- Add Agency
+<div class="card-header">
+  <div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h3>Create Agency</h3>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ route('agencies.index') }}"> Back</a>
+        </div>
+    </div>
   </div>
+
   
+  <div class="card-body">
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+      </div><br />
+    @endif
 
   <div class="card-body">
-      <form method="POST" action="/agencies/create">
+      <form method="post" action="{{ route('agencies.store') }}">
           <div class="form-group">
               @csrf
               <label for="name">Name</label>
@@ -53,10 +72,10 @@ button {
           </div>
           <div class="form-group">
               <label for="active">Active</label>
-              <input type="number" class="form-control" name="active"/>
+              <input type="boolean" class="form-control" name="active"/>
           </div>
-          <button type="submit" class="btn btn-block btn-danger">Add Agency</button>
+          <button type="submit" class="btn btn-block btn-primary">Create Agency</button>
       </form>
   </div>
-
+</div>
 @endsection

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AgencyController;
+
 
 
 
@@ -21,13 +21,8 @@ Route::get('/', function(){
     return view ('welcome');
 });
 
-// Route::resource('agencies', AgencyController::class);
+Route::resource('/agencies', AgencyController::class);
 
 
-Route::get('/agencies',[AgencyController::class,('agency')]);
-Route::get('/agencies/delete/{id}',[AgencyController::class,('delete')]);
-Route::view('/agencies/create','agencies.create');
-Route::post('/agencies/create',[AgencyController::class,('add')]);
-Route::get('/agencies/update/{id}',[AgencyController::class,('update')]);
-Route::get('/agencies/update/',[AgencyController::class,('change')]);
+
   
