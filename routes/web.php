@@ -21,3 +21,5 @@ Route::get('/', function(){
 Route::resource('customers', CustomerController::class);
 
 Route::resource('/agencies', AgencyController::class);
+
+Route::resource('trips', TripsController::class);
