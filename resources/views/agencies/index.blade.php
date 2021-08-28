@@ -1,5 +1,5 @@
 
-@extends('layout')
+@extends('agencies/layout')
 
 @section('content')
 <div class="row">

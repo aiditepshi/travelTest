@@ -10,13 +10,13 @@ class AgencyController extends Controller
     public function index(){
 
         $agency= Agency::all();
-        return view('index',compact('agency'));
+        return view('/agencies/index',compact('agency'));
     }
     
 
     public function create()
     {
-        return view('create');
+        return view('/agencies/create');
     }
 
     /**
@@ -47,7 +47,7 @@ class AgencyController extends Controller
     public function show($id)
     {
         $showagency = Agency::where('id', $id)->first();
-        return view('show',compact('showagency'));
+        return view('/agencies/show',compact('showagency'));
     }
 
     
@@ -60,7 +60,7 @@ class AgencyController extends Controller
     public function edit($id)
     {
         $editagency = Agency::findOrFail($id);
-        return view('edit', compact('editagency'));
+        return view('/agencies/edit', compact('editagency'));
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('agencies/layout')
 
 @section('content')
 <style>
