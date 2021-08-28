@@ -12,6 +12,7 @@ class Customer extends Model
         'last_name',
         'email',
         'telephone',
+        'age'
     ];
 
     public function user(){
