@@ -72,7 +72,9 @@ button {
           </div>
           <div class="form-group">
               <label for="active">Active</label>
-              <input type="boolean" class="form-control" name="active"/>
+
+              <input type="checkbox"  name="active" value="active"/>
+              
           </div>
           <button type="submit" class="btn btn-block btn-primary">Create Agency</button>
       </form>

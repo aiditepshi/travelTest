@@ -31,11 +31,20 @@ class AgencyController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'nipt' => 'required|max:255',
-            'active' => 'required|boolean',
+            'active' => 'max:255',
         ]);
+
+      
+        if(!isset($storeData ['active'])){
+            $storeData['active']=false;
+         }else{
+             $storeData['active']=true;
+         }
+
+        
         $agency= Agency::create($storeData);
 
-        return redirect('agencies')->with('completed', 'Agency has been created!');
+        return redirect('agencies');
     }
     
     /**
@@ -76,8 +85,17 @@ class AgencyController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'nipt' => 'required|max:255',
-            'active' => 'required|max:255',
+            'active' => 'boolean'
         ]);
+
+        if(!isset($updateData ['active'])){
+           $updateData['active']=false;
+        }else{
+
+            $updateData['active']=true;
+        }
+
+       
         Agency::whereId($id)->update($updateData);
         return redirect('agencies');
     }
