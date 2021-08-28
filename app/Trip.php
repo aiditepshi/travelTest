@@ -28,7 +28,7 @@ class Trip extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function agencies(){
+    public function agency(){
         return $this->belongsTo(Agency::class);
     }
 
