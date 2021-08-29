@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $allUsers = User::all();
-        return view('users\index', compact('allUsers'));
+        return view('users/index', compact('allUsers'));
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
     {
 //        return view('users\create');
 //        return view('resources\views\auth');
-        return view('users\create');
+        return view('users/create');
     }
 
     /**
@@ -64,7 +64,7 @@ class UserController extends Controller
     public function show($id)
     {
         $oneUser = User::where('id', $id)->first(); //User::find(2), User::findOrFail(2),User::whereIn('id', [2])->first()
-        return view('users\show', compact('oneUser'));
+        return view('users/show', compact('oneUser'));
     }
 
     /**
@@ -78,7 +78,7 @@ class UserController extends Controller
         $userEdit = User::findOrFail($id);
         $customers = Customer::all();
         $agencies =  Agency::all();
-        return view('users\edit', compact('userEdit', 'customers', 'agencies'));
+        return view('users/edit', compact('userEdit', 'customers', 'agencies'));
     }
 
     /**
