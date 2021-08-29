@@ -38,7 +38,7 @@
                 <td>Password</td>
                 <td>Role</td>
                 <td>Agency ID</td>
-                <td>Customer ID</td>
+{{--                <td>Customer ID</td>--}}
                 <td class="text-center">Action</td>
             </tr>
             </thead>
@@ -51,6 +51,7 @@
                     <td>{{$userRecord->password}}</td>
                     <td>{{$userRecord->role}}</td>
                     <td>{{$userRecord->agency->name}}</td>
+{{--                    <td>{{$userRecord->customer->first_name}}</td>--}}
                     <td class="text-center">
                         <a class="btn btn-info btn-sm" href="{{ route('users.show',$userRecord->id) }}">Show</a>
                         <a href="{{ route('users.edit', $userRecord->id) }}" class="btn btn-primary btn-sm">Edit</a>
