@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
-    return view ('welcome');
+Route::get('/', function () {
+    return view('welcome');
 });
 
 Route::resource('customers', CustomerController::class);
-
+Route::resource('users', UserController::class);
 Route::resource('/agencies', AgencyController::class);
-
 Route::resource('trips', TripsController::class);
+Route::get('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login') ;
