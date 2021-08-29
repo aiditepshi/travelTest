@@ -30,15 +30,12 @@
         <table class="table ">
             <thead>
             <tr class="table-primary text-center fw-bold ">
-{{--                'agency_id',--}}
-{{--                'customer_id'--}}
                 <td>ID</td>
                 <td>Name</td>
                 <td>Email</td>
-                <td>Password</td>
                 <td>Role</td>
                 <td>Agency ID</td>
-{{--                <td>Customer ID</td>--}}
+                <td>Customer ID</td>
                 <td class="text-center">Action</td>
             </tr>
             </thead>
@@ -48,10 +45,9 @@
                     <td>{{$userRecord->id}}</td>
                     <td>{{$userRecord->name}}</td>
                     <td>{{$userRecord->email}}</td>
-                    <td>{{$userRecord->password}}</td>
                     <td>{{$userRecord->role}}</td>
-                    <td>{{$userRecord->agency->name}}</td>
-{{--                    <td>{{$userRecord->customer->first_name}}</td>--}}
+                    <td>@if($userRecord->agency){{$userRecord->agency->name}}@endif</td>
+                    <td>@if($userRecord->customer){{$userRecord->customer->first_name}}@endif</td>
                     <td class="text-center">
                         <a class="btn btn-info btn-sm" href="{{ route('users.show',$userRecord->id) }}">Show</a>
                         <a href="{{ route('users.edit', $userRecord->id) }}" class="btn btn-primary btn-sm">Edit</a>

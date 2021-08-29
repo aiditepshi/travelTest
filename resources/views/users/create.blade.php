@@ -36,11 +36,9 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="{{ route('users.store') }}">
+            <form id="forma" method="post" action="{{ route('users.store') }}">
                 <div class="form-group">
                     @csrf
-                    {{--                    'agency_id',--}}
-                    {{--                    'customer_id'--}}
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="name"/>
                 </div>
@@ -52,28 +50,28 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group" form="forma">
                     <label for="role">Choose a Role:</label>
-                    <select name="role" form="form-control">
+                    <select onchange="changeRole()" id="roleSelect" name="role" form="forma">
                         <option value="customer">customer</option>
                         <option value="employee">employee</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    @csrf
-                    {{--                    'agency_id',--}}
-                    {{--                    'customer_id'--}}
-                    <label for="agency_id">Agency-ID</label>
-                    <select name="agency_id" form="form-control">
+                <div style="display: none;" id="agencyDiv" class="form-group">
+                    <label for="agency_id">Agency</label>
+                    <select name="agency_id" form="forma">
+                        @foreach($agencies as $agency)
+                            <option value="{{$agency->id}}" > {{$agency->name}}</option>
+                        @endforeach
                     </select>
                 </div>
-                <div class="form-group">
-                    @csrf
-                    {{--                    'agency_id',--}}
-                    {{--                    'customer_id'--}}
-                    <label for="customer_id">Customer-ID</label>
-                    <select name="customer_id" form="form-control">
+                <div id="customerDiv" class="form-group">
+                    <label for="customer_id">Customer</label>
+                    <select name="customer_id" form="forma">
+                        @foreach($customers as $custmer)
+                            <option value="{{$custmer->id}}" > {{$custmer->first_name}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <button type="submit" class="btn btn-block btn-danger">Create User</button>
@@ -81,4 +79,17 @@
         </div>
     </div>
 @endsection
+<script>
 
+    function changeRole() {
+
+        var selected = document.getElementById('roleSelect').value;
+        if (selected === 'customer') {
+            document.getElementById('customerDiv').style.display = 'block';
+            document.getElementById('agencyDiv').style.display = 'none';
+        } else {
+            document.getElementById('agencyDiv').style.display = 'block';
+            document.getElementById('customerDiv').style.display = 'none';
+        }
+    }
+</script>

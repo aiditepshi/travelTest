@@ -28,9 +28,9 @@ class UserController extends Controller
      */
     public function create()
     {
-//        return view('users\create');
-//        return view('resources\views\auth');
-        return view('users/create');
+        $customers = Customer::all();
+        $agencies = Agency::all();
+        return view('users/create', compact('customers', 'agencies'));
     }
 
     /**
@@ -45,10 +45,16 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|max:255',
             'password' => 'required|max:255',
-            'role' => 'required|max:255',
+            'role' => 'required|in:customer,employee',
             'agency_id' => 'required|max:255',
             'customer_id' => 'required|max:255'
         ]);
+
+        if ($storeData['role'] == 'customer') {
+            $storeData['agency_id'] = null;
+        } else {
+            $storeData['customer_id'] = null;
+        }
         $insertUser = User::create($storeData);
 
         return redirect('/users')->with('completed', 'User has been saved!');
@@ -77,7 +83,7 @@ class UserController extends Controller
     {
         $userEdit = User::findOrFail($id);
         $customers = Customer::all();
-        $agencies =  Agency::all();
+        $agencies = Agency::all();
         return view('users/edit', compact('userEdit', 'customers', 'agencies'));
     }
 
@@ -98,9 +104,9 @@ class UserController extends Controller
             'agency_id' => 'required|max:255',
             'customer_id' => 'required|max:255'
         ]);
-        if($updateData['role'] == 'customer') {
+        if ($updateData['role'] == 'customer') {
             $updateData['agency_id'] = null;
-        }else{
+        } else {
             $updateData['customer_id'] = null;
         }
         User::whereId($id)->update($updateData);

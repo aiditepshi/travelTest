@@ -99,6 +99,5 @@
             document.getElementById('agencyDiv').style.display = 'block';
             document.getElementById('customerDiv').style.display = 'none';
         }
-        // alert(selected)
     }
 </script>
