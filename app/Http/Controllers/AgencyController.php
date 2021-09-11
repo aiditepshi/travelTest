@@ -99,13 +99,13 @@ class AgencyController extends Controller
             'image' => 'required|image:jpg,png,gif,svg|max:2048',
         ]);
 
+
         if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $updateData['image'] = "$profileImage";
-        }else{
-            unset($updateData['image']);
+            //$destinationPath = 'image/';
+            $profileImage = date('YmdHis'). "." . $image->getClientOriginalExtension();
+            //$image->move($destinationPath, $profileImage);
+            Storage::disk('public')->put($profileImage, file_get_contents($image));
+            $updateData['image'] = "storage/$profileImage";
         }
         if(!isset($updateData ['active'])){
            $updateData['active']=false;

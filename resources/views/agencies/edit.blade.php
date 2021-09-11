@@ -84,7 +84,7 @@ button {
           <div class="form-group">
               <label for="image">Image</label>
               <input type="file" class="form-control" name="image" value="image"/>
-              <img src="{{asset($getagencies->image)}}" width="300px">
+              <img src="{{asset($editagency->image)}}" width="300px">
           </div>
           <button type="submit" class="btn btn-block btn-primary">Update Agency</button>
       </form>
