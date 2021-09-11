@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Agency;
 use Illuminate\Http\Request;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class AgencyController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
-        $agency= Agency::all();
-        return view('/agencies/index',compact('agency'));
+        $agency = Agency::all();
+        return view('/agencies/index', compact('agency'));
     }
-    
+
 
     public function create()
     {
@@ -22,7 +24,7 @@ class AgencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -32,45 +34,46 @@ class AgencyController extends Controller
             'address' => 'required|max:255',
             'nipt' => 'required|max:255',
             'active' => 'max:255',
-            'image' => 'required|image:jpg,png,gif,svg|max:2048',
+            'image' => 'image:jpg,png,gif,svg|max:2048',
         ]);
         if ($image = $request->file('image')) {
             $destinationPath = 'image/';
-            $profileImage = date('YmdHis'). "." . $image->getClientOriginalExtension();
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $storeData['image'] = "$profileImage";
         }
 
-      
-        if(!isset($storeData ['active'])){
-            $storeData['active']=false;
-         }else{
-             $storeData['active']=true;
-         }
 
-        
-        $agency= Agency::create($storeData);
+        if (!isset($storeData ['active'])) {
+            $storeData['active'] = false;
+        } else {
+            $storeData['active'] = true;
+        }
+
+
+        $agency = Agency::create($storeData);
+        \Mail::to('test@gmail.com')->send(new \App\Mail\OrderShipped());
 
         return redirect('agencies');
     }
-    
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $showagency = Agency::where('id', $id)->first();
-        return view('/agencies/show',compact('showagency'));
+        return view('/agencies/show', compact('showagency'));
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -82,8 +85,8 @@ class AgencyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -93,7 +96,7 @@ class AgencyController extends Controller
             'address' => 'required|max:255',
             'nipt' => 'required|max:255',
             'active' => 'boolean',
-            'image' => 'required|image:jpg,png,gif,svg|max:2048',
+            'image' => 'image:jpg,png,gif,svg|max:2048',
         ]);
 
         if ($image = $request->file('image')) {
@@ -101,17 +104,17 @@ class AgencyController extends Controller
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $updateData['image'] = "$profileImage";
-        }else{
+        } else {
             unset($updateData['image']);
         }
-        if(!isset($updateData ['active'])){
-           $updateData['active']=false;
-        }else{
+        if (!isset($updateData ['active'])) {
+            $updateData['active'] = false;
+        } else {
 
-            $updateData['active']=true;
+            $updateData['active'] = true;
         }
 
-       
+
         Agency::whereId($id)->update($updateData);
         return redirect('agencies');
     }
@@ -119,7 +122,7 @@ class AgencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -129,5 +132,5 @@ class AgencyController extends Controller
 
         return redirect('agencies');
     }
-   
+
 }

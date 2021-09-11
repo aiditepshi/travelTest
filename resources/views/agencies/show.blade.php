@@ -48,12 +48,12 @@
         </div>
         <div class="col-md-6">
             <div class="col-xs-12 col-sm-12 col-md-12">
-                
+
                 <div class="form-group">
-                  <img src=https://image.freepik.com/free-vector/travel-with-us-background_23-2147507833.jpg  width="500" height="333"> 
-                  
+                    <td><img src="/image/{{ $showagency->image }}" width="500px" height="333px" alt=""></td>
+
                 </div>
-                
+
             </div>
         </div>
     </div>
