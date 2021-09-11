@@ -50,7 +50,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
 
                 <div class="form-group">
-                    <td><img src="/image/{{ $showagency->image }}" width="500px" height="333px" alt=""></td>
+                  <img src="{{asset($showagency->image)}}"  width="500" height="333">
 
                 </div>
 

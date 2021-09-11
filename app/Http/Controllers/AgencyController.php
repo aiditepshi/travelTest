@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Agency;
 use Illuminate\Http\Request;
-use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Support\Facades\Storage;
+
 
 class AgencyController extends Controller
 {
@@ -37,21 +38,22 @@ class AgencyController extends Controller
             'image' => 'image:jpg,png,gif,svg|max:2048',
         ]);
         if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $storeData['image'] = "$profileImage";
+            //$destinationPath = 'image/';
+            $profileImage = date('YmdHis'). "." . $image->getClientOriginalExtension();
+            //$image->move($destinationPath, $profileImage);
+            Storage::disk('public')->put($profileImage, file_get_contents($image));
+            $storeData['image'] = "storage/$profileImage";
         }
 
 
-        if (!isset($storeData ['active'])) {
-            $storeData['active'] = false;
-        } else {
-            $storeData['active'] = true;
-        }
+        if(!isset($storeData ['active'])){
+            $storeData['active']=false;
+         }else{
+             $storeData['active']=true;
+         }
 
 
-        $agency = Agency::create($storeData);
+        $agency= Agency::create($storeData);
         \Mail::to('test@gmail.com')->send(new \App\Mail\OrderShipped());
 
         return redirect('agencies');
@@ -99,13 +101,13 @@ class AgencyController extends Controller
             'image' => 'image:jpg,png,gif,svg|max:2048',
         ]);
 
+
         if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $updateData['image'] = "$profileImage";
-        } else {
-            unset($updateData['image']);
+            //$destinationPath = 'image/';
+            $profileImage = date('YmdHis'). "." . $image->getClientOriginalExtension();
+            //$image->move($destinationPath, $profileImage);
+            Storage::disk('public')->put($profileImage, file_get_contents($image));
+            $updateData['image'] = "storage/$profileImage";
         }
         if (!isset($updateData ['active'])) {
             $updateData['active'] = false;
@@ -128,6 +130,8 @@ class AgencyController extends Controller
     public function destroy($id)
     {
         $agency = Agency::findOrFail($id);
+        $agency->users()->delete();
+        $agency->trips()->delete();
         $agency->delete();
 
         return redirect('agencies');
