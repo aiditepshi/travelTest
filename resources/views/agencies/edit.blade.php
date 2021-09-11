@@ -1,9 +1,9 @@
 @extends('agencies/layout')
 
 @section('content')
- 
+
 <style>
-table, td, th {  
+table, td, th {
   border: 1px solid black ;
   text-align: left;
 }
@@ -24,7 +24,7 @@ button {
 }
 .button1{
   background-color:#DC143C;
-  
+
 }
 .button3{
   background-color:CornflowerBlue;
@@ -84,7 +84,7 @@ button {
           <div class="form-group">
               <label for="image">Image</label>
               <input type="file" class="form-control" name="image" value="image"/>
-              <img src="/image/{{ $editagency->image }}" width="300px">
+              <img src="{{asset($getagencies->image)}}" width="300px">
           </div>
           <button type="submit" class="btn btn-block btn-primary">Update Agency</button>
       </form>

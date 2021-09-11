@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Agency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class AgencyController extends Controller
 {
@@ -12,7 +14,7 @@ class AgencyController extends Controller
         $agency= Agency::all();
         return view('/agencies/index',compact('agency'));
     }
-    
+
 
     public function create()
     {
@@ -35,25 +37,26 @@ class AgencyController extends Controller
             'image' => 'required|image:jpg,png,gif,svg|max:2048',
         ]);
         if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
+            //$destinationPath = 'image/';
             $profileImage = date('YmdHis'). "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $storeData['image'] = "$profileImage";
+            //$image->move($destinationPath, $profileImage);
+            Storage::disk('public')->put($profileImage, file_get_contents($image));
+            $storeData['image'] = "storage/$profileImage";
         }
 
-      
+
         if(!isset($storeData ['active'])){
             $storeData['active']=false;
          }else{
              $storeData['active']=true;
          }
 
-        
+
         $agency= Agency::create($storeData);
 
         return redirect('agencies');
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -66,7 +69,7 @@ class AgencyController extends Controller
         return view('/agencies/show',compact('showagency'));
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -111,7 +114,7 @@ class AgencyController extends Controller
             $updateData['active']=true;
         }
 
-       
+
         Agency::whereId($id)->update($updateData);
         return redirect('agencies');
     }
@@ -125,9 +128,11 @@ class AgencyController extends Controller
     public function destroy($id)
     {
         $agency = Agency::findOrFail($id);
+        $agency->users()->delete();
+        $agency->trips()->delete();
         $agency->delete();
 
         return redirect('agencies');
     }
-   
+
 }

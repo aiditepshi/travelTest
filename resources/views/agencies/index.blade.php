@@ -15,7 +15,7 @@
 
 
 <style>
-table, td, th {  
+table, td, th {
   border: 1px solid black ;
   text-align: left;
 }
@@ -36,7 +36,7 @@ button {
 }
 .button1{
   background-color:#DC143C;
-  
+
 }
 .button3{
   background-color:CornflowerBlue;
@@ -54,8 +54,8 @@ button {
     <th>Nipt</th>
     <th>Active</th>
     <th>Image</th>
-    <th class="colspan=2" >Action</th>    
- </tr>  
+    <th class="colspan=2" >Action</th>
+ </tr>
   @foreach($agency as $getagencies)
     <tr>
 
@@ -64,8 +64,8 @@ button {
       <td>{{ $getagencies->address}}</td>
       <td>{{ $getagencies->nipt}}</td>
       <td>{{ $getagencies->active}}</td>
-      <td><img src="/image/{{ $getagencies->image }}" width="100px"></td>
-    
+      <td><img src="{{asset($getagencies->image)}}" width="100px"></td>
+
      <td class="text-center">
             <a class="btn btn-primary btn-sm" href="{{ route('agencies.edit', $getagencies->id)}}" >Edit</a>
             <a class="btn btn-info btn-sm" href="{{ route('agencies.show',$getagencies->id) }}">Show</a>
@@ -74,10 +74,10 @@ button {
                 @method('DELETE')
                 <button class="btn btn-danger btn-sm" type="submit">Delete</button>
               </form>
-      </td> 
-    </tr> 
+      </td>
+    </tr>
   @endforeach
-</table>  
+</table>
 
 @endsection
 
