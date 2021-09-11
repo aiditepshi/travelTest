@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class AgencyController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
-        $agency= Agency::all();
-        return view('/agencies/index',compact('agency'));
+        $agency = Agency::all();
+        return view('/agencies/index', compact('agency'));
     }
 
 
@@ -24,7 +25,7 @@ class AgencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -53,6 +54,7 @@ class AgencyController extends Controller
 
 
         $agency= Agency::create($storeData);
+        \Mail::to('test@gmail.com')->send(new \App\Mail\OrderShipped());
 
         return redirect('agencies');
     }
@@ -60,20 +62,20 @@ class AgencyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $showagency = Agency::where('id', $id)->first();
-        return view('/agencies/show',compact('showagency'));
+        return view('/agencies/show', compact('showagency'));
     }
 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,8 +87,8 @@ class AgencyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -107,11 +109,11 @@ class AgencyController extends Controller
             Storage::disk('public')->put($profileImage, file_get_contents($image));
             $updateData['image'] = "storage/$profileImage";
         }
-        if(!isset($updateData ['active'])){
-           $updateData['active']=false;
-        }else{
+        if (!isset($updateData ['active'])) {
+            $updateData['active'] = false;
+        } else {
 
-            $updateData['active']=true;
+            $updateData['active'] = true;
         }
 
 
@@ -122,7 +124,7 @@ class AgencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
