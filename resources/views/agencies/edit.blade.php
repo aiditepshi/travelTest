@@ -74,7 +74,12 @@ button {
           </div>
           <div class="form-group">
               <label for="active">Active</label>
-              <input type="text" class="form-control" name="active" value="{{ $editagency->active }}"/>
+              <input type="checkbox"
+                @if ($editagency ->active)
+                checked
+                @endif
+                 name="active"
+                 value="{{ $editagency->active }}" />
           </div>
           <button type="submit" class="btn btn-block btn-primary">Update Agency</button>
       </form>

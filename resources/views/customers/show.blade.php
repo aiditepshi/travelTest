@@ -1,10 +1,10 @@
-@extends('customers\layout')
+@extends('customers/layout')
 
 @section('content')
 
 <div class="card push-top">
   <div class="card-header">
-    <h3 class="pull-left"> Show Customer Details</h3>
+    <h3 class="pull-left"> Show Customer Details </h3>
     <div class="pull-right">
         <a class="btn btn-primary" href="{{ route('customers.index') }}"> Back</a>
     </div>

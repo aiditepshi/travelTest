@@ -1,4 +1,4 @@
-@extends('customers\layout')
+@extends('customers/layout')
 
 @section('content')
 <div class="row">
@@ -11,7 +11,16 @@
             </div>
         </div>
     </div>
-
+<div class="card-body">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div><br/>
+    @endif
 
 <style>
   .push-top {
@@ -20,7 +29,7 @@
 </style>
 
 <div class="push-top">
-  @if ($message = Session::get('completed'))
+  @if ($message = Session::get('error'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>

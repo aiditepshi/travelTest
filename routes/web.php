@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
-    return view ('welcome');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::resource('customers', CustomerController::class);
-
+Route::resource('customers', CustomerController::class)->middleware('auth');
+Route::resource('users', UserController::class)->middleware('klajdi');
 Route::resource('/agencies', AgencyController::class);
+Route::resource('trips', TripsController::class);
+
+Route::post('post-login', [\App\Http\Controllers\AuthController::class, 'postLogin'])->name('postLogin');
+Route::get('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login') ;
+Route::get('register', [\App\Http\Controllers\AuthController::class, 'register'])->name('register')->middleware('log'); ;
+Route::post('post-register', [\App\Http\Controllers\AuthController::class, 'postRegister'])->name('register.post') ;
+Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('register.logout') ;
+

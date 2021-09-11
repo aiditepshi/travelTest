@@ -15,7 +15,7 @@ class CustomerController extends Controller
     public function index()
     {
         $allcustomers = Customer::all();
-        return view('customers\index', compact('allcustomers'));
+        return view('/customers/index', compact('allcustomers'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customers\create');
+        return view('customers/create');
     }
 
     /**
@@ -58,7 +58,7 @@ class CustomerController extends Controller
     public function show($id)
     {
         $oneCustomer = Customer::where('id', $id)->first(); //User::find(2), User::findOrFail(2),User::whereIn('id', [2])->first()
-        return view('customers\show',compact('oneCustomer'));
+        return view('/customers/show',compact('oneCustomer'));
     }
 
     /**
@@ -70,7 +70,7 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customertoedit = Customer::findOrFail($id);
-        return view('customers\edit', compact('customertoedit'));
+        return view('/customers/edit', compact('customertoedit'));
     }
 
     /**
