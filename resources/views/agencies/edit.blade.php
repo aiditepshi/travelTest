@@ -40,7 +40,7 @@ button {
                 <h3 class="header">Edit & Update Agency</h3>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('agencies.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('agencies.index') }}" enctype="multipart/form-data"> Back</a>
             </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ button {
       </div><br />
     @endif
   <div class="card-body">
-      <form method="POST" action="{{ route('agencies.update', $editagency->id) }}">
+      <form method="POST" action="{{ route('agencies.update', $editagency->id) }}" enctype="multipart/form-data" >
           <div class="form-group">
               @csrf
               @method('PATCH')
@@ -80,6 +80,11 @@ button {
                 @endif
                  name="active"
                  value="{{ $editagency->active }}" />
+          </div>
+          <div class="form-group">
+              <label for="image">Image</label>
+              <input type="file" class="form-control" name="image" value="image"/>
+              <img src="/image/{{ $editagency->image }}" width="300px">
           </div>
           <button type="submit" class="btn btn-block btn-primary">Update Agency</button>
       </form>

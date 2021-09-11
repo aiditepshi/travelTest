@@ -53,15 +53,19 @@ button {
     <th>Address</th>
     <th>Nipt</th>
     <th>Active</th>
+    <th>Image</th>
     <th class="colspan=2" >Action</th>    
  </tr>  
   @foreach($agency as $getagencies)
     <tr>
+
       <td>{{ $getagencies->id}}</td>
       <td>{{ $getagencies->name}}</td>
       <td>{{ $getagencies->address}}</td>
       <td>{{ $getagencies->nipt}}</td>
       <td>{{ $getagencies->active}}</td>
+      <td><img src="/image/{{ $getagencies->image }}" width="100px"></td>
+    
      <td class="text-center">
             <a class="btn btn-primary btn-sm" href="{{ route('agencies.edit', $getagencies->id)}}" >Edit</a>
             <a class="btn btn-info btn-sm" href="{{ route('agencies.show',$getagencies->id) }}">Show</a>

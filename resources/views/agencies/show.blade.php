@@ -26,16 +26,23 @@
                 {{ $showagency->name }}
             </div>
             <div class="form-group">
-            <h5 class ="details">Address:</h5>
+               <h5 class ="details">Address:</h5>
                 {{ $showagency->address}}
             </div>
             <div class="form-group">
-            <h5 class ="details">Nipt:</h5>
+                <h5 class ="details">Nipt:</h5>
                 {{ $showagency->nipt}}
             </div>
             <div class="form-group">
-            <h5 class ="details">Active:</h5>
+               <h5 class ="details">Active:</h5>
                 {{ $showagency->active}}
+            </div>
+            <div class="form-group">
+               <h5 class ="details">Active:</h5>
+                {{ $showagency->active}}
+            </div>   <div class="form-group">
+               <h5 class ="details">Image:</h5>
+                {{ $showagency->image}}
             </div>
         </div>
         </div>
