@@ -34,7 +34,7 @@ class AgencyController extends Controller
             'address' => 'required|max:255',
             'nipt' => 'required|max:255',
             'active' => 'max:255',
-            'image' => 'required|image:jpg,png,gif,svg|max:2048',
+            'image' => 'image:jpg,png,gif,svg|max:2048',
         ]);
         if ($image = $request->file('image')) {
             //$destinationPath = 'image/';
@@ -96,7 +96,7 @@ class AgencyController extends Controller
             'address' => 'required|max:255',
             'nipt' => 'required|max:255',
             'active' => 'boolean',
-            'image' => 'required|image:jpg,png,gif,svg|max:2048',
+            'image' => 'image:jpg,png,gif,svg|max:2048',
         ]);
 
 
