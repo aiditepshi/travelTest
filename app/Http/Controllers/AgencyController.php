@@ -32,7 +32,14 @@ class AgencyController extends Controller
             'address' => 'required|max:255',
             'nipt' => 'required|max:255',
             'active' => 'max:255',
+            'image' => 'required|image:jpg,png,gif,svg|max:2048',
         ]);
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis'). "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $storeData['image'] = "$profileImage";
+        }
 
       
         if(!isset($storeData ['active'])){
@@ -85,9 +92,18 @@ class AgencyController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'nipt' => 'required|max:255',
-            'active' => 'boolean'
+            'active' => 'boolean',
+            'image' => 'required|image:jpg,png,gif,svg|max:2048',
         ]);
 
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $updateData['image'] = "$profileImage";
+        }else{
+            unset($updateData['image']);
+        }
         if(!isset($updateData ['active'])){
            $updateData['active']=false;
         }else{

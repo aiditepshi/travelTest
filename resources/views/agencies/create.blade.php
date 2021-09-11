@@ -56,7 +56,7 @@ button {
     @endif
 
   <div class="card-body">
-      <form method="post" action="{{ route('agencies.store') }}">
+      <form method="post" action="{{ route('agencies.store') }}" enctype="multipart/form-data"  >
           <div class="form-group">
               @csrf
               <label for="name">Name</label>
@@ -72,9 +72,11 @@ button {
           </div>
           <div class="form-group">
               <label for="active">Active</label>
-
               <input type="checkbox"  name="active" value="active"/>
-              
+          </div>
+          <div class="form-group">
+              <label for="image">Image</label>
+              <input type="file"  name="image" value="image"/>
           </div>
           <button type="submit" class="btn btn-block btn-primary">Create Agency</button>
       </form>

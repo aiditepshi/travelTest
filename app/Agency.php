@@ -18,6 +18,7 @@ class Agency extends Model
         'address',
         'nipt',
         'active',
+        'image',
     ];
 
     public function trips()
