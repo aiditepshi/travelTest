@@ -54,7 +54,7 @@ class AgencyController extends Controller
 
 
         $agency= Agency::create($storeData);
-        \Mail::to('test@gmail.com')->send(new \App\Mail\OrderShipped());
+        \Mail::to('test@gmail.com')->send(new \App\Mail\CreateAgenciesMail($agency));
 
         return redirect('agencies');
     }
@@ -135,6 +135,11 @@ class AgencyController extends Controller
         $agency->delete();
 
         return redirect('agencies');
+    }
+
+    public function indexApi(){
+        $agencies = Agency::all();
+        return response()->json(['succes'=>true,'data'=>$agencies]);
     }
 
 }

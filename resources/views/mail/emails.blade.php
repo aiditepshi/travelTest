@@ -1,1 +1,3 @@
-<h1>Fix Agency Edit</h1>
+<p>Agency with name {{$agency->name}}</p>
+<p>Nipt is {{$agency->nipt}}</p>
+

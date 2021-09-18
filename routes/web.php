@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::resource('customers', CustomerController::class)->middleware('auth');
 Route::resource('users', UserController::class)->middleware('klajdi');
-Route::resource('/agencies', AgencyController::class);
+Route::resource('agencies', AgencyController::class);
 Route::resource('trips', TripsController::class);
 
 Route::post('post-login', [\App\Http\Controllers\AuthController::class, 'postLogin'])->name('postLogin');
