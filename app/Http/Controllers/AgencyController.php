@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Agency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use mysql_xdevapi\Exception;
 use App\Http\Requests\CreateAgencyRequest;
 
 
@@ -56,7 +55,7 @@ class AgencyController extends Controller
 
 
         $agency= Agency::create($storeData);
-        \Mail::to('test@gmail.com')->send(new \App\Mail\OrderShipped());
+        \Mail::to('test@gmail.com')->send(new \App\Mail\CreateAgenciesMail($agency));
 
         return redirect('agencies');
     }
@@ -150,7 +149,7 @@ class AgencyController extends Controller
 
             $agencycreate = Agency::create($storeData);
             return response()->json(['success' => true]);
-        } catch (Exception $e){
+        } catch (\Exception $e){
             dd($e->getMessage());
         }
     }

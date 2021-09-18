@@ -7,18 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class OrderShipped extends Mailable
+class CreateAgenciesMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    private $agency;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($agency)
     {
-        //
+        $this->agency = $agency;
     }
 
     /**
@@ -28,7 +30,7 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->from('sindibeqo24@gmail.com')
-            ->view('/mail/emails');
+        return $this->from('xhuendhysa@gmail.com')->view('mail/emails')->with(['agency'=>
+        $this->agency]);
     }
 }

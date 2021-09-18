@@ -69,9 +69,10 @@ button {
      <td class="text-center">
             <a class="btn btn-primary btn-sm" href="{{ route('agencies.edit', $getagencies->id)}}" >Edit</a>
             <a class="btn btn-info btn-sm" href="{{ route('agencies.show',$getagencies->id) }}">Show</a>
-            <form action="{{ route('agencies.destroy',$getagencies->id)}}" method="post" style="display: inline-block">
+            <form action="{{ route('agencies.destroy',$getagencies->id)}}" method="POST" style="display: inline-block">
                 @csrf
                 @method('DELETE')
+                <input type="hidden" name="_method" value="DELETE">
                 <button class="btn btn-danger btn-sm" type="submit">Delete</button>
               </form>
       </td>
