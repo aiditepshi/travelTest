@@ -15,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('api')->get('/agencies',"AgencyController@indexApi");
+Route::middleware('api')->get('/agencies', "AgencyController@indexApi");
+Route::middleware('api')->post('/agencies', "AgencyController@storeApi");
+
