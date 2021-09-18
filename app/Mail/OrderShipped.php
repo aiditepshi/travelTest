@@ -28,7 +28,7 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->from('citozibrand@gmail.com')
+        return $this->from('sindibeqo24@gmail.com')
             ->view('/mail/emails');
     }
 }

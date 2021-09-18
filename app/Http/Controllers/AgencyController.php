@@ -137,4 +137,9 @@ class AgencyController extends Controller
         return redirect('agencies');
     }
 
+    public function indexApi(){
+        $agenies = Agency :: all();
+        return response ()-> json(['succes'=>true, 'data'=>$agenies]);
+    }
+
 }
