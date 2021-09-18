@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Agency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use mysql_xdevapi\Exception;
 
 
 class AgencyController extends Controller
@@ -139,7 +140,23 @@ class AgencyController extends Controller
 
     public function indexApi(){
         $agenies = Agency :: all();
-        return response ()-> json(['succes'=>true, 'data'=>$agenies]);
+        return response()-> json(['succes'=>true, 'data'=>$agenies]);
+    }
+
+    public function storeApi(Request $request){
+        try {
+            $storeData = $request->validate([
+                'name' => 'required|max:255',
+                'address' => 'required|max:255',
+                'nipt' => 'required|max:255',
+                'active' => 'boolean'
+            ]);
+
+            $agencycreate = Agency::create($storeData);
+            return response()->json(['success' => true]);
+        } catch (Exception $e){
+            dd($e->getMessage());
+        }
     }
 
 }
